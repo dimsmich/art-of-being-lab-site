@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ART OF BEING LAB — интеллектуальный клуб по подписке</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --stone:      #F2EFE9;
+      --ivory:      #FAFAF8;
+      --ink:        #0D1E35;
+      --oxford:     #0D2D52;
+      --gold:       #A08940;
+      --warm-gold:  #C4A84A;
+      --bordeaux:   #7A0C20;
+      --body:       #5A5650;
+      --muted:      #6A6560;
+      --serif: 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--stone);
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── UTILITIES ── */
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow-line { width: 24px; height: 1px; background: var(--bordeaux); flex-shrink: 0; }
+    .eyebrow-txt {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: var(--bordeaux);
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .sec-marker {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--bordeaux);
+      font-style: italic;
+      white-space: nowrap;
+    }
+    .sec-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .sec-line { flex: 1; height: 0.5px; background: rgba(13,30,53,0.1); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(242,239,233,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(13,30,53,0.09);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+    .nav-logo-big {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+    }
+    .nav-logo-sub {
+      font-size: 7px;
+      letter-spacing: 0.3em;
+      color: var(--bordeaux);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      font-size: 11px;
+      color: var(--body);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      font-size: 10px;
+      padding: 9px 22px;
+      background: var(--oxford);
+      color: var(--stone);
+      letter-spacing: 0.07em;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('website/62C075AB-C296-4169-AC8D-3A6AB8EC75C1.PNG');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.45) sepia(0.2);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(13,30,53,0.72) 40%, rgba(13,30,53,0.3) 100%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-left .eyebrow { margin-bottom: 24px; }
+    .hero-left .eyebrow-line { background: rgba(196,168,74,0.7); }
+    .hero-left .eyebrow-txt { color: var(--warm-gold); letter-spacing: 0.22em; }
+
+    .hero-slogan {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(196,168,74,0.65);
+      margin-bottom: 18px;
+      font-style: italic;
+      font-family: var(--serif);
+    }
+
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: 54px;
+      color: var(--stone);
+      line-height: 1.08;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+    .hero-h1 em { font-style: italic; color: var(--warm-gold); }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(242,239,233,0.72);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+    .hero-btns { display: flex; gap: 20px; align-items: center; }
+    .btn-primary {
+      font-size: 11px;
+      padding: 13px 28px;
+      background: var(--oxford);
+      color: var(--stone);
+      border-radius: 2px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-text {
+      font-size: 11px;
+      color: rgba(242,239,233,0.75);
+      border-bottom: 0.5px solid rgba(242,239,233,0.35);
+      padding-bottom: 1px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-text:hover { color: var(--stone); border-color: rgba(242,239,233,0.7); }
+
+    /* Hero card */
+    .hero-card {
+      background: rgba(13,45,82,0.88);
+      border: 0.5px solid rgba(242,239,233,0.1);
+      border-radius: 3px;
+      padding: 32px 28px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-card-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: rgba(242,239,233,0.35);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-card-row { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+    .hero-card-num {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--warm-gold);
+      min-width: 22px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .hero-card-txt {
+      font-size: 13px;
+      color: rgba(242,239,233,0.8);
+      line-height: 1.55;
+    }
+    .hero-card-div { height: 0.5px; background: rgba(242,239,233,0.1); margin: 22px 0; }
+    .hero-card-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+    .hero-card-price {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--stone);
+    }
+    .hero-card-per { font-size: 10px; color: rgba(242,239,233,0.35); }
+    .hero-card-btn {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      background: rgba(160,137,64,0.15);
+      border: 0.5px solid rgba(196,168,74,0.55);
+      border-radius: 2px;
+      font-size: 10px;
+      color: var(--warm-gold);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .hero-card-btn:hover { background: rgba(122,12,32,0.32); }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--ink);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .strip-inner {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .strip-item {
+      flex: 1;
+      font-size: 9px;
+      color: rgba(242,239,233,0.35);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+      position: relative;
+    }
+    .strip-item + .strip-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 0.5px; height: 14px;
+      background: rgba(242,239,233,0.1);
+    }
+
+    /* ── § 01 MIRROR ── */
+    #mirror {
+      background: var(--ivory);
+      padding: 80px 40px;
+    }
+    .mirror-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .mirror-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 0;
+    }
+    .mirror-item {
+      background: var(--stone);
+      border: 0.5px solid rgba(13,30,53,0.07);
+      border-radius: 3px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .mirror-num {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: rgba(13,30,53,0.15);
+      font-style: italic;
+      min-width: 24px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .mirror-txt {
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.65;
+    }
+    .mirror-item:nth-child(5) {
+      grid-column: 1 / -1;
+    }
+
+    /* ── § 02 ESSENCE ── */
+    #essence {
+      background: var(--stone);
+      padding: 80px 40px;
+    }
+    .essence-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .essence-img {
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .essence-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .essence-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(13,30,53,0.3));
+    }
+    .essence-content .section-head { margin-bottom: 28px; }
+    .essence-body {
+      font-size: 15px;
+      color: var(--body);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .essence-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .tag {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: var(--bordeaux);
+      text-transform: uppercase;
+      border: 0.5px solid rgba(122,12,32,0.25);
+      border-radius: 2px;
+      padding: 5px 10px;
+    }
+    .essence-quote {
+      background: var(--oxford);
+      border-radius: 3px;
+      padding: 24px 28px;
+    }
+    .essence-quote-txt {
+      font-family: var(--serif);
+      font-size: 17px;
+      color: rgba(242,239,233,0.88);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .essence-quote-src {
+      font-size: 9px;
+      color: var(--warm-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    /* ── § 03 WEEKLY ── */
+    #weekly {
+      background: var(--ivory);
+      padding: 80px 40px;
+    }
+    .weekly-inner { max-width: 1200px; margin: 0 auto; }
+    .weekly-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .w-card {
+      background: var(--stone);
+      border: 0.5px solid rgba(13,30,53,0.07);
+      border-radius: 3px;
+      padding: 24px 20px;
+    }
+    .w-card-tag {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      color: var(--bordeaux);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .w-card-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .w-card-txt { font-size: 12px; color: var(--muted); line-height: 1.65; }
+    .w-card-foot {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 0.5px solid rgba(13,30,53,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .w-card-meta { font-size: 9px; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+    .w-card-arrow { font-size: 14px; color: var(--oxford); }
+    .weekly-footnote {
+      margin-top: 24px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── § 04 PILLARS ── */
+    #pillars { background: var(--stone); }
+
+    .pillar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+    }
+    .pillar:nth-child(even) { direction: rtl; }
+    .pillar:nth-child(even) > * { direction: ltr; }
+
+    .pillar-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pillar-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(13,30,53,0.25);
+    }
+
+    .pillar-content {
+      background: var(--ivory);
+      padding: 60px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .pillar-number {
+      font-family: var(--serif);
+      font-size: 56px;
+      color: rgba(13,30,53,0.06);
+      font-style: italic;
+      line-height: 1;
+      margin-bottom: -8px;
+    }
+    .pillar-eyebrow { margin-bottom: 16px; }
+    .pillar-h2 {
+      font-family: var(--serif);
+      font-size: 32px;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+    .pillar-body {
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .pillar-list { list-style: none; }
+    .pillar-list li {
+      font-size: 13px;
+      color: var(--body);
+      line-height: 1.6;
+      padding: 7px 0;
+      border-bottom: 0.5px solid rgba(13,30,53,0.06);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .pillar-list li::before {
+      content: '—';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+    .pillar-list li:last-child { border-bottom: none; }
+
+    /* ── § 05 MARINA ── */
+    #marina {
+      background: var(--oxford);
+      padding: 80px 40px;
+    }
+    .marina-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .marina-photo {
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    .marina-photo img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .marina-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 0.5px solid rgba(242,239,233,0.1);
+      border-radius: 3px;
+    }
+    .marina-content .section-head .sec-marker { color: var(--warm-gold); }
+    .marina-content .section-head .sec-title { color: var(--stone); }
+    .marina-content .section-head .sec-line { background: rgba(242,239,233,0.1); }
+    .marina-role {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--warm-gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .marina-pullquote {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: rgba(242,239,233,0.9);
+      font-style: italic;
+      line-height: 1.55;
+      border-left: 1.5px solid var(--bordeaux);
+      padding-left: 20px;
+      margin-bottom: 28px;
+    }
+    .marina-body {
+      font-size: 14px;
+      color: rgba(242,239,233,0.65);
+      line-height: 1.8;
+    }
+    .marina-body p + p { margin-top: 14px; }
+
+    /* ── § 06 TESTIMONIALS ── */
+    #testimonials {
+      background: var(--stone);
+      padding: 80px 40px;
+    }
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .t-card {
+      background: var(--ivory);
+      border: 0.5px solid rgba(13,30,53,0.07);
+      border-radius: 3px;
+      padding: 28px 24px;
+    }
+    .t-quote-mark {
+      font-family: var(--serif);
+      font-size: 36px;
+      color: rgba(122,12,32,0.15);
+      line-height: 0.8;
+      margin-bottom: 14px;
+    }
+    .t-txt {
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .t-foot {
+      border-top: 0.5px solid rgba(13,30,53,0.08);
+      padding-top: 14px;
+    }
+    .t-name { font-size: 11px; color: var(--bordeaux); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 3px; }
+    .t-meta { font-size: 10px; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ── § 07 PRICING ── */
+    #pricing {
+      background: var(--ink);
+      padding: 80px 40px;
+    }
+    .pricing-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .pricing-inner .section-head .sec-marker { color: var(--warm-gold); }
+    .pricing-inner .section-head .sec-title { color: var(--stone); }
+    .pricing-inner .section-head .sec-line { background: rgba(242,239,233,0.1); }
+
+    .pricing-card {
+      background: var(--oxford);
+      border: 0.5px solid rgba(242,239,233,0.1);
+      border-radius: 3px;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 40px 40px 36px;
+    }
+    .pricing-card-label {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: rgba(242,239,233,0.35);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .pricing-feature {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 0.5px solid rgba(242,239,233,0.07);
+    }
+    .pricing-feature:last-of-type { border-bottom: none; }
+    .pricing-feature-num {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--warm-gold);
+      min-width: 22px;
+      font-style: italic;
+    }
+    .pricing-feature-txt {
+      font-size: 13px;
+      color: rgba(242,239,233,0.78);
+      line-height: 1.55;
+    }
+    .pricing-div { height: 0.5px; background: rgba(242,239,233,0.1); margin: 24px 0; }
+    .pricing-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+    }
+    .pricing-price {
+      font-family: var(--serif);
+      font-size: 36px;
+      color: var(--stone);
+    }
+    .pricing-period { font-size: 11px; color: rgba(242,239,233,0.35); }
+    .pricing-cta {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      background: rgba(160,137,64,0.15);
+      border: 0.5px solid rgba(196,168,74,0.55);
+      border-radius: 2px;
+      font-size: 11px;
+      color: var(--warm-gold);
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      margin-bottom: 14px;
+    }
+    .pricing-cta:hover { background: rgba(122,12,32,0.32); }
+    .pricing-note {
+      font-size: 10px;
+      color: rgba(242,239,233,0.25);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── § 08 FAQ ── */
+    #faq {
+      background: var(--ivory);
+      padding: 80px 40px;
+    }
+    .faq-inner { max-width: 800px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 0.5px solid rgba(13,30,53,0.1);
+    }
+    .faq-q {
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--ink);
+      padding: 22px 0 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--oxford); }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--bordeaux);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      font-family: var(--sans);
+      font-weight: 300;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding-bottom 0.3s;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding-bottom: 22px;
+    }
+
+    /* ── FINAL CTA ── */
+    #cta {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('website/6EE60DE2-D2B8-4278-A3E2-00649F50E43C.PNG');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3) sepia(0.15);
+    }
+    .cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(13,30,53,0.55), rgba(13,30,53,0.75));
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 80px 40px;
+      max-width: 700px;
+    }
+    .cta-eyebrow { justify-content: center; margin-bottom: 24px; }
+    .cta-eyebrow .eyebrow-line { background: var(--warm-gold); }
+    .cta-eyebrow .eyebrow-txt { color: var(--warm-gold); }
+    .cta-h2 {
+      font-family: var(--serif);
+      font-size: 42px;
+      color: var(--stone);
+      line-height: 1.15;
+      margin-bottom: 18px;
+      font-weight: 400;
+    }
+    .cta-h2 em { font-style: italic; color: var(--warm-gold); }
+    .cta-sub {
+      font-size: 14px;
+      color: rgba(242,239,233,0.65);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .cta-btns { display: flex; gap: 20px; justify-content: center; align-items: center; }
+    .cta-btn-primary {
+      font-size: 12px;
+      padding: 14px 32px;
+      background: var(--oxford);
+      color: var(--stone);
+      border-radius: 2px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .cta-btn-primary:hover { opacity: 0.85; }
+    .cta-btn-text {
+      font-size: 11px;
+      color: rgba(242,239,233,0.6);
+      border-bottom: 0.5px solid rgba(242,239,233,0.3);
+      padding-bottom: 1px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .cta-btn-text:hover { color: var(--stone); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 0.5px solid rgba(242,239,233,0.06);
+    }
+    .footer-logo { display: flex; flex-direction: column; line-height: 1; }
+    .footer-logo-big {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: rgba(242,239,233,0.6);
+      letter-spacing: 0.06em;
+    }
+    .footer-logo-sub {
+      font-size: 7px;
+      letter-spacing: 0.26em;
+      color: rgba(196,168,74,0.7);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .footer-copy {
+      font-size: 10px;
+      color: rgba(242,239,233,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 12px 20px; }
+      .nav-links { display: none; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px 60px; }
+      .hero-h1 { font-size: 38px; }
+
+      #mirror, #essence, #weekly, #pillars, #marina, #testimonials, #pricing, #faq {
+        padding: 56px 20px;
+      }
+      .mirror-grid { grid-template-columns: 1fr; }
+      .mirror-item:nth-child(5) { grid-column: 1; }
+      .essence-inner { grid-template-columns: 1fr; }
+      .essence-img { aspect-ratio: 16/9; }
+      .weekly-cards { grid-template-columns: 1fr; }
+      .pillar { grid-template-columns: 1fr; min-height: auto; direction: ltr !important; }
+      .pillar-img { aspect-ratio: 16/9; }
+      .pillar-content { padding: 40px 24px; }
+      .marina-inner { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-card { padding: 28px 24px; }
+      .cta-h2 { font-size: 30px; }
+      footer { flex-direction: column; gap: 14px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">
+      <span class="nav-logo-big">ART OF BEING</span>
+      <span class="nav-logo-sub">L A B &nbsp;·&nbsp; клуб по подписке</span>
+    </a>
+    <div class="nav-links">
+      <a href="#mirror">О клубе</a>
+      <a href="#what-awaits">Программа</a>
+      <a href="#marina">Об авторе</a>
+      <a href="#pricing">Тарифы</a>
+    </div>
+    <a href="#pricing" class="nav-cta">Вступить</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="eyebrow" style="margin-bottom:10px;">
+          <div class="eyebrow-line" style="background:rgba(196,168,74,0.6);"></div>
+          <div class="eyebrow-txt" style="color:var(--warm-gold); letter-spacing:0.28em;">Art of Being Lab</div>
+        </div>
+        <div class="eyebrow" style="margin-bottom:14px;">
+          <div class="eyebrow-line" style="background:rgba(196,168,74,0.4);"></div>
+          <div class="eyebrow-txt" style="color:rgba(196,168,74,0.65);">Нейронаука · Практики · Сообщество</div>
+        </div>
+        <div class="hero-slogan">You don't need fixing. Your system needs recalibration.</div>
+        <h1 class="hero-h1">Знание, которое меняет<br><em>внутреннюю архитектуру</em><br>жизни.</h1>
+        <p class="hero-sub">Передовые идеи из нейронауки, психологии и науки о сознании, без воды, без мистификации. Только то, что помогает понимать себя и действительно влиять на свою жизнь.</p>
+        <div class="hero-btns">
+          <a href="#pricing" class="btn-primary">Вступить в клуб</a>
+          <a href="#what-awaits" class="btn-text">Что внутри →</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-eyebrow">Членство в клубе</div>
+        <div class="hero-card-row"><div class="hero-card-num">I.</div><div class="hero-card-txt">Один месяц — одна тема, несколько форматов: передовая наука понятным языком</div></div>
+        <div class="hero-card-row"><div class="hero-card-num">II.</div><div class="hero-card-txt">Практики — только то, что работает</div></div>
+        <div class="hero-card-row"><div class="hero-card-num">III.</div><div class="hero-card-txt">Развенчание мифов и освобождение от ощущения «со мной что-то не так»</div></div>
+        <div class="hero-card-row"><div class="hero-card-num">IV.</div><div class="hero-card-txt">Закрытое сообщество думающих людей</div></div>
+        <div class="hero-card-div"></div>
+        <div class="hero-card-price-row">
+          <div class="hero-card-price">от 2 900 ₽</div>
+          <div class="hero-card-per">в месяц</div>
+        </div>
+        <a href="#pricing" class="hero-card-btn">Вступить в клуб →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <div class="strip-item">Нейронаука</div>
+      <div class="strip-item">Спиритуальные практики</div>
+      <div class="strip-item">Живое общение</div>
+      <div class="strip-item">Библиотека знаний</div>
+    </div>
+  </div>
+
+  <!-- § 01 MIRROR -->
+  <section id="mirror">
+    <div class="mirror-inner">
+      <div class="section-head">
+        <span class="sec-marker">§ 01</span>
+        <span class="sec-title">Это про тебя?</span>
+        <div class="sec-line"></div>
+      </div>
+      <div class="mirror-grid">
+        <div class="mirror-item">
+          <div class="mirror-num">1.</div>
+          <div class="mirror-txt">Ты умный, осознанный человек. Но хочется наконец отделить зёрна от плевел.</div>
+        </div>
+        <div class="mirror-item">
+          <div class="mirror-num">2.</div>
+          <div class="mirror-txt">Ты много читаешь, слушаешь, изучаешь. Информации — too much, результаты затерялись в пути.</div>
+        </div>
+        <div class="mirror-item">
+          <div class="mirror-num">3.</div>
+          <div class="mirror-txt">Ты пробовал(а) терапию, курсы, медитации. Что-то работало, что-то нет — и непонятно почему. Хочется понять механику.</div>
+        </div>
+        <div class="mirror-item">
+          <div class="mirror-num">4.</div>
+          <div class="mirror-txt">Тебе важна доказательная база. Ты устал(а) от «просто почувствуй» и хочешь понять, что происходит на уровне системы.</div>
+        </div>
+        <div class="mirror-item">
+          <div class="mirror-num">5.</div>
+          <div class="mirror-txt">Ты ищешь среду, где можно думать вслух. Среди людей, которые задают те же вопросы и чувствуют разницу между качественным знанием и информационным мусором, даже когда он красиво упакован.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 02 ESSENCE -->
+  <section id="essence">
+    <div class="essence-inner">
+      <div class="essence-img">
+        <img src="website/D96A0A2E-1461-41B8-876A-53A2E7322A76.PNG" alt="Art of Being Lab" />
+        <div class="essence-img-overlay"></div>
+      </div>
+      <div class="essence-content">
+        <div class="section-head">
+          <span class="sec-marker">§ 02</span>
+          <span class="sec-title">Что такое Art of Being Lab</span>
+          <div class="sec-line"></div>
+        </div>
+        <p class="essence-body">Art of Being Lab — это интеллектуальный клуб, построенный на едином принципе: знание должно менять что-то внутри, а не просто храниться в голове.</p>
+        <p class="essence-body">Каждый месяц я беру передовые исследования в нейронауке, психологии, науке о сознании и перевожу их на язык жизни. Помогаю расшифровать, понять и применить. Отделяю то, что работает, от того, что звучит красиво и громко.</p>
+        <div class="essence-tags">
+          <span class="tag">Нейронаука</span>
+          <span class="tag">Психология</span>
+          <span class="tag">Сознание</span>
+          <span class="tag">Практики</span>
+          <span class="tag">Доказательная база</span>
+        </div>
+        <div class="essence-quote">
+          <div class="essence-quote-txt">«Нейронаука рука об руку со спиритуальностью: отсеиваем лишнее, берём лучшее.»</div>
+          <div class="essence-quote-src">Marina Dimshits · Art of Being Lab</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 03 WHAT AWAITS -->
+  <section id="what-awaits" style="background:var(--ivory); padding:56px 40px 40px;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div class="section-head">
+        <span class="sec-marker">§ 03</span>
+        <span class="sec-title">Что тебя ждёт в клубе</span>
+        <div class="sec-line"></div>
+      </div>
+      <p style="font-size:15px; color:var(--body); line-height:1.75; max-width:600px;">Три опоры — знания, практики, сообщество. Каждая закрывает свою часть пути.</p>
+    </div>
+  </section>
+
+  <!-- § 04 PILLARS -->
+  <section id="pillars">
+
+    <!-- Знания -->
+    <div class="pillar">
+      <div class="pillar-img">
+        <img src="website/710D1A49-ECB1-42AC-93B7-D897736B2FA7.PNG" alt="Библиотека знаний" />
+        <div class="pillar-img-overlay"></div>
+      </div>
+      <div class="pillar-content">
+        <div class="pillar-number">I.</div>
+        <div class="eyebrow pillar-eyebrow">
+          <div class="eyebrow-line"></div>
+          <div class="eyebrow-txt">Первая опора</div>
+        </div>
+        <h2 class="pillar-h2">Знания</h2>
+        <p class="pillar-body">Передовые исследования в нейронауке, психологии и науке о сознании, переведённые на человеческий язык.</p>
+        <ul class="pillar-list">
+          <li>Один месяц — одна тема, несколько форматов</li>
+          <li>Исследования, которые меняют точку зрения</li>
+          <li>Развенчание мифов: что работает, что нет</li>
+          <li>Архив библиотеки знаний</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Практики / Нейронаука -->
+    <div class="pillar">
+      <div class="pillar-content" style="background:var(--stone);">
+        <div class="pillar-number">II.</div>
+        <div class="eyebrow pillar-eyebrow">
+          <div class="eyebrow-line"></div>
+          <div class="eyebrow-txt">Вторая опора</div>
+        </div>
+        <h2 class="pillar-h2">Практики</h2>
+        <p class="pillar-body">Только то, что работает в реальной жизни, без мистики ради мистики.</p>
+        <ul class="pillar-list">
+          <li>Инструменты для применения сегодня</li>
+          <li>Аудиопрактики и письменные задания</li>
+          <li>Работа с нервной системой, вниманием, телом</li>
+          <li>Спиритуальные практики с опорой на науку</li>
+        </ul>
+      </div>
+      <div class="pillar-img">
+        <img src="website/D9E3CCF6-441F-491C-8F82-012DBDB663E9.PNG" alt="Нейронаука" />
+        <div class="pillar-img-overlay" style="background:rgba(13,30,53,0.2);"></div>
+      </div>
+    </div>
+
+    <!-- Сообщество -->
+    <div class="pillar">
+      <div class="pillar-img">
+        <img src="website/7F6AABCB-D9E3-4E5B-8A97-5C21605AEB07.PNG" alt="Сообщество" />
+        <div class="pillar-img-overlay"></div>
+      </div>
+      <div class="pillar-content">
+        <div class="pillar-number">III.</div>
+        <div class="eyebrow pillar-eyebrow">
+          <div class="eyebrow-line"></div>
+          <div class="eyebrow-txt">Третья опора</div>
+        </div>
+        <h2 class="pillar-h2">Сообщество</h2>
+        <p class="pillar-body">Закрытый Telegram — люди, которые задают правильные вопросы и не ждут волшебную таблетку.</p>
+        <ul class="pillar-list">
+          <li>Живое общение в чате и Q&amp;A с Мариной</li>
+          <li>Обсуждения без поверхностности</li>
+          <li>Люди с близкой глубиной запроса и уважением к качественному знанию</li>
+          <li>Безопасное интеллектуальное пространство: без осуждения и токсичности</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:var(--ivory); padding:20px 40px 32px; text-align:center;">
+      <p style="font-size:11px; color:var(--muted); letter-spacing:0.04em;">Все материалы остаются в архиве — ты не теряешь доступ.</p>
+    </div>
+  </section>
+
+  <!-- § 04 MARINA -->
+  <section id="marina">
+    <div class="marina-inner">
+      <div class="marina-photo">
+        <img src="website/E9429158-A66E-4311-86A5-237A071006B6.PNG" alt="Marina Dimshits" />
+      </div>
+      <div class="marina-content">
+        <div class="section-head">
+          <span class="sec-marker">§ 04</span>
+          <span class="sec-title">Marina Dimshits</span>
+          <div class="sec-line"></div>
+        </div>
+        <div class="marina-role">Life Coach · Human Engineering</div>
+        <div class="marina-pullquote">«Я изучаю исследования — ты получаешь суть. Без воды, без мистики, самые "сливки".»</div>
+        <div class="marina-body">
+          <p>Моё первое высшее образование — филологическое. Я всегда была человеком текста, смысла и глубины: мне важно не просто знать, а понимать, как устроено явление изнутри и как передать это так, чтобы сложное становилось ясным.</p>
+          <p>Благодаря любви к качественной литературе и начитанности я с детства хотела понять, как устроен человек — нервная система, сознание, то, что двигает нами изнутри. Позже этот интерес привёл меня к психологии, коучингу, нейронауке и обучению в Harvard Medical School, NYU и Yale.</p>
+          <p>Я много лет работаю с людьми на стыке науки, психологии и практических инструментов, и снова и снова вижу одно: люди перегружены информацией, но недополучают ясности и конкретных результатов. Art of Being Lab — это место, которое я сама хотела бы иметь 10 лет назад.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 06 TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-head">
+        <span class="sec-marker">§ 05</span>
+        <span class="sec-title">Голоса участников</span>
+        <div class="sec-line"></div>
+      </div>
+      <div class="testimonials-grid">
+        <div class="t-card">
+          <div class="t-quote-mark">"</div>
+          <div class="t-txt">Марина, хочу поблагодарить тебя — это оказалось целой программой, которая по ценности раз в 10 больше, чем её стоимость. Вся информация постепенно встраивалась, темп отличный, всё улеглось и не растянулось. После есть ясность как двигаться здесь и сейчас, а не в мечтах и снах. Для меня «ясность» — это вообще самое ценное всегда.</div>
+          <div class="t-foot">
+            <div class="t-name">Ирина С.</div>
+          </div>
+        </div>
+        <div class="t-card">
+          <div class="t-quote-mark">"</div>
+          <div class="t-txt">Марина, я благодарю тебя — это гораздо больше, чем просто клуб. У нас так много «знаний» о том, как нужно желать и мечтать, но как реально идти — вот это настоящий эксклюзив. При этом без перегруза информации, в классном темпе, с поддержкой в чате. Мне было очень ценно.</div>
+          <div class="t-foot">
+            <div class="t-name">Марина К.</div>
+          </div>
+        </div>
+        <div class="t-card">
+          <div class="t-quote-mark">"</div>
+          <div class="t-txt">Информация в достаточном темпе — есть возможность обдумать и оценить свои мысли, нет спешки. После ты остаёшься не просто с одним результатом, а с инструментом для любой следующей цели. Это не одноразовое обучение. Великолепно.</div>
+          <div class="t-foot">
+            <div class="t-name">Анна Л.</div>
+          </div>
+        </div>
+        <div class="t-card">
+          <div class="t-quote-mark">"</div>
+          <div class="t-txt">Какие-то вещи мне были уже знакомы — я что-то читала, слышала, но структуры не было никакой. После материалов Марины у меня очень чётко выстроилась система в голове, серое вещество стало двигаться активнее. Самое главное — ко мне пришли идеи, как облегчить достижение своей цели.</div>
+          <div class="t-foot">
+            <div class="t-name">Мария С.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 07 PRICING -->
+  <section id="pricing">
+    <div class="pricing-inner">
+      <div class="section-head">
+        <span class="sec-marker" style="color:var(--warm-gold);">§ 06</span>
+        <span class="sec-title" style="color:var(--stone);">Вступить в клуб</span>
+        <div class="sec-line" style="background:rgba(242,239,233,0.1);"></div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-card-label">Подписка · Art of Being Lab</div>
+        <div class="pricing-feature">
+          <div class="pricing-feature-num">I.</div>
+          <div class="pricing-feature-txt">Материалы каждый месяц — наука, практики, разборы</div>
+        </div>
+        <div class="pricing-feature">
+          <div class="pricing-feature-num">II.</div>
+          <div class="pricing-feature-txt">Живое общение в чате + Q&amp;A с Мариной</div>
+        </div>
+        <div class="pricing-feature">
+          <div class="pricing-feature-num">III.</div>
+          <div class="pricing-feature-txt">Закрытый Telegram — безопасное пространство с приятным общением</div>
+        </div>
+        <div class="pricing-feature">
+          <div class="pricing-feature-num">IV.</div>
+          <div class="pricing-feature-txt">Полный архив материалов — доступен в любое время на протяжении действия подписки</div>
+        </div>
+        <div class="pricing-div"></div>
+        <div class="pricing-price-row">
+          <div class="pricing-price">2 900 ₽</div>
+          <div class="pricing-period">в месяц</div>
+        </div>
+        <a href="#" class="pricing-cta">Вступить в клуб →</a>
+        <div class="pricing-note">Отмена подписки в любой момент · без скрытых условий</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 08 FAQ -->
+  <section id="faq">
+    <div class="faq-inner">
+      <div class="section-head">
+        <span class="sec-marker">§ 07</span>
+        <span class="sec-title">Частые вопросы</span>
+        <div class="sec-line"></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Для кого этот клуб? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Для думающих взрослых, кто интересуется тем, как устроен человек, и хочет применять знания в жизни, а не просто накапливать. Возраст, профессия и локация не важны. Важно: ты ценишь качество, у тебя нет терпения к воде, мотивационным речам и красиво упакованному информационному мусору. Ты ищешь среду, где можно расти интеллектуально.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Чем клуб отличается от курса? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Курс — это программа с началом и концом. Клуб — это живая среда, которая обновляется каждый месяц. Здесь нет дедлайнов и домашних заданий «на оценку». Есть контент, который ты изучаешь в своём темпе, практики, которые применяешь когда готов, и сообщество, в которое возвращаешься. Архив всех материалов доступен с первого дня подписки.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Что если я пропущу часть материалов? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Ничего страшного. Все материалы складываются в архив, ты можешь вернуться к ним в любое время. Клуб устроен так, чтобы вписываться в реальную жизнь, а не усложнять её.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Где всё происходит? <span class="faq-icon">+</span></div>
+        <div class="faq-a">После оплаты ты получаешь доступ в закрытый Telegram-канал: там выходят все материалы. Отдельного приложения и регистраций нигде нет — всё в одном месте.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Как отменить подписку? <span class="faq-icon">+</span></div>
+        <div class="faq-a">В любой момент, без объяснений и без штрафов. Ты управляешь подпиской самостоятельно, списания происходят раз в месяц. Доступ сохраняется до конца оплаченного периода.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="cta">
+    <div class="cta-bg"></div>
+    <div class="cta-overlay"></div>
+    <div class="cta-inner">
+      <div class="eyebrow cta-eyebrow">
+        <div class="eyebrow-line" style="background:var(--warm-gold);"></div>
+        <div class="eyebrow-txt" style="color:var(--warm-gold);">Art of Being Lab</div>
+        <div class="eyebrow-line" style="background:var(--warm-gold);"></div>
+      </div>
+      <h2 class="cta-h2">Место, где знание<br>становится <em>частью тебя.</em></h2>
+      <p class="cta-sub">Вступай и получи доступ к архиву материалов, интеллектуальному контенту и сообществу с первого дня.</p>
+      <div class="cta-btns">
+        <a href="#pricing" class="cta-btn-primary">Вступить в клуб</a>
+        <a href="#mirror" class="cta-btn-text">Узнать больше</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <div class="footer-logo-big">ART OF BEING</div>
+      <div class="footer-logo-sub">L A B &nbsp;·&nbsp; клуб по подписке</div>
+    </div>
+    <div class="footer-copy">© 2026 Art of Being · Marina Dimshits · artofbeings.com</div>
+  </footer>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Smooth nav hide on scroll up / show on scroll down (subtle)
+    let lastScroll = 0;
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      if (cur > 80 && cur > lastScroll) {
+        nav.style.transform = 'translateY(-100%)';
+        nav.style.transition = 'transform 0.3s ease';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+      lastScroll = cur;
+    });
+  </script>
+
+</body>
+</html>
