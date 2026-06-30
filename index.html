@@ -921,7 +921,7 @@
         <h1 class="hero-h1">Знание, которое меняет<br><em>внутреннюю архитектуру</em><br>жизни.</h1>
         <p class="hero-sub">Передовые идеи из нейронауки, психологии и науки о сознании, без воды, без мистификации. Только то, что помогает понимать себя и действительно влиять на свою жизнь.</p>
         <div class="hero-btns">
-          <a href="#pricing" class="btn-primary">Вступить в клуб</a>
+          <a href="https://t.me/artofbeing_club_bot" target="_blank" rel="noopener noreferrer" class="btn-primary">Вступить в клуб</a>
           <a href="#what-awaits" class="btn-text">Что внутри →</a>
         </div>
       </div>
@@ -1198,7 +1198,7 @@
           <div class="pricing-price">2 900 ₽</div>
           <div class="pricing-period">в месяц</div>
         </div>
-        <a href="#" class="pricing-cta">Вступить в клуб →</a>
+        <a href="https://t.me/artofbeing_club_bot" target="_blank" rel="noopener noreferrer" class="pricing-cta">Вступить в клуб →</a>
         <div class="pricing-note">Отмена подписки в любой момент · без скрытых условий</div>
       </div>
     </div>
@@ -1248,7 +1248,7 @@
       <h2 class="cta-h2">Место, где знание<br>становится <em>частью тебя.</em></h2>
       <p class="cta-sub">Вступай и получи доступ к архиву материалов, интеллектуальному контенту и сообществу с первого дня.</p>
       <div class="cta-btns">
-        <a href="#pricing" class="cta-btn-primary">Вступить в клуб</a>
+        <a href="https://t.me/artofbeing_club_bot" target="_blank" rel="noopener noreferrer" class="cta-btn-primary">Вступить в клуб</a>
         <a href="#mirror" class="cta-btn-text">Узнать больше</a>
       </div>
     </div>
@@ -1264,6 +1264,14 @@
   </footer>
 
   <script>
+    // Open Telegram links in a new tab
+    document.querySelectorAll('a[href^="https://t.me/"]').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.open(link.href, '_blank', 'noopener,noreferrer');
+      });
+    });
+
     // FAQ accordion
     document.querySelectorAll('.faq-q').forEach(q => {
       q.addEventListener('click', () => {
