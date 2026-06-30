@@ -130,6 +130,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background-image: url('website/62C075AB-C296-4169-AC8D-3A6AB8EC75C1.PNG');
       background-size: cover;
       background-position: center 30%;
@@ -138,6 +139,7 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background: linear-gradient(105deg, rgba(13,30,53,0.72) 40%, rgba(13,30,53,0.3) 100%);
     }
     .hero-inner {
@@ -183,7 +185,7 @@
       margin-bottom: 36px;
       max-width: 460px;
     }
-    .hero-btns { display: flex; gap: 20px; align-items: center; }
+    .hero-btns { display: flex; gap: 20px; align-items: center; position: relative; z-index: 3; }
     .btn-primary {
       font-size: 11px;
       padding: 13px 28px;
@@ -771,6 +773,7 @@
     .cta-bg {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background-image: url('website/6EE60DE2-D2B8-4278-A3E2-00649F50E43C.PNG');
       background-size: cover;
       background-position: center;
@@ -779,6 +782,7 @@
     .cta-overlay {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background: linear-gradient(to bottom, rgba(13,30,53,0.55), rgba(13,30,53,0.75));
     }
     .cta-inner {
@@ -900,7 +904,7 @@
       <a href="#marina">Об авторе</a>
       <a href="#pricing">Тарифы</a>
     </div>
-    <a href="#pricing" class="nav-cta">Вступить</a>
+    <a href="https://t.me/artofbeing_club_bot" target="_blank" rel="noopener noreferrer" class="nav-cta">Вступить</a>
   </nav>
 
   <!-- HERO -->
@@ -936,7 +940,7 @@
           <div class="hero-card-price">от 2 900 ₽</div>
           <div class="hero-card-per">в месяц</div>
         </div>
-        <a href="#pricing" class="hero-card-btn">Вступить в клуб →</a>
+        <a href="https://t.me/artofbeing_club_bot" target="_blank" rel="noopener noreferrer" class="hero-card-btn">Вступить в клуб →</a>
       </div>
     </div>
   </section>
@@ -1264,14 +1268,6 @@
   </footer>
 
   <script>
-    // Open Telegram links in a new tab
-    document.querySelectorAll('a[href^="https://t.me/"]').forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        window.open(link.href, '_blank', 'noopener,noreferrer');
-      });
-    });
-
     // FAQ accordion
     document.querySelectorAll('.faq-q').forEach(q => {
       q.addEventListener('click', () => {
